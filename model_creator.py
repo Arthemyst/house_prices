@@ -73,7 +73,7 @@ def model_to_estimate_player_value(dataframe_train, columns_list):
     return (model, model_score, scaler_train)
 
 
-def generate_best_model(columns_for_estimation, df_train_dummies, n=50):
+def generate_best_model(columns_for_estimation, df_train_dummies, n=20):
     best_model = None
     best_score = 0
     best_scaler = None
@@ -94,6 +94,6 @@ if __name__ == "__main__":
     columns_for_estimation = choose_columns_for_estimation(df_train_dummies)
     df_train_dummies = remove_outliers_in_columns(columns_for_estimation, df_train_dummies)
     model, model_score, scaler_train = model_to_estimate_player_value(df_train_dummies, columns_for_estimation)
-    model, scaler, score = generate_best_model(columns_for_estimation, df_train_dummies, n=50)
+    model, scaler, score = generate_best_model(columns_for_estimation, df_train_dummies, n=20)
     print(f"Model score: {round(score, 2)}")
     joblib.dump(model, "model.pkl")
