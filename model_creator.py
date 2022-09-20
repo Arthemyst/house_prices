@@ -58,6 +58,14 @@ def remove_outliers_in_columns(columns_for_estimation, df_train_dummies):
         return df_train_dummies
 
 
+def change_area_format(df):
+    df["TotalBsmtSF"] = df["TotalBsmtSF"] * 0.09290304
+    df["1stFlrSF"] = df["1stFlrSF"] * 0.09290304
+    df["GrLivArea"] = df["GrLivArea"] * 0.09290304
+    df["GarageArea"] = df["GarageArea"] * 0.09290304
+    return df
+
+
 def model_to_estimate_player_value(dataframe_train, columns_list):
     y = dataframe_train["SalePrice"]
     X = dataframe_train[columns_list]
@@ -92,6 +100,7 @@ if __name__ == "__main__":
     df_train = df_train_raw.copy()
     df_train = remove_or_replace_nan_values(df_train)
     df_train_dummies = pd.get_dummies(df_train)
+    df_train_dummies = change_area_format(df_train_dummies)
     columns_for_estimation = choose_columns_for_estimation(df_train_dummies)
     df_train_dummies = remove_outliers_in_columns(
         columns_for_estimation, df_train_dummies
