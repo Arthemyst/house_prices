@@ -1,51 +1,98 @@
 import streamlit as st
-from sklearn.ensemble import RandomForestRegressor
 import joblib
 import numpy as np
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import MinMaxScaler
-import numpy as np
-from sklearn.model_selection import RandomizedSearchCV
 
+df = pd.DataFrame()
+if "mdf" not in st.session_state:
+    st.session_state.mdf = df
 model = joblib.load("model.pkl")
+
+
+if "overal_qual" not in st.session_state:
+    st.session_state["overal_qual"] = 6
 
 overal_qual = st.slider(
     "Overall material and finish quality", min_value=1, max_value=10, value=6
 )
-st.write(f"{overal_qual}")
+st.session_state.overal_qual = overal_qual
+
+if "total_bsmt_sf" not in st.session_state:
+    st.session_state["total_bsmt_sf"] = 1045
+
 total_bsmt_sf = st.slider(
-    "Total square feet of basement area", min_value=0, max_value=6110, value=1045
+    "Total square feet of basement area", min_value=0, max_value=6000, value=1045
 )
-st.write(f"{total_bsmt_sf}")
+st.session_state.total_bsmt_sf = total_bsmt_sf
+
+if "floor_1st_sf" not in st.session_state:
+    st.session_state["floor_1st_sf"] = 1500
+
 floor_1st_sf = st.slider(
-    "First Floor square feet", min_value=400, max_value=4692, value=1500
+    "First Floor square feet", min_value=400, max_value=4500, value=1500
 )
-st.write(f"{floor_1st_sf}")
+st.session_state.floor_1st_sf = floor_1st_sf
+
+if "gr_liv_area" not in st.session_state:
+    st.session_state["gr_liv_area"] = 1500
+
+
 gr_liv_area = st.slider(
     "Above grade (ground) living area square feet",
     min_value=400,
-    max_value=5642,
+    max_value=5500,
     value=1500,
 )
-st.write(f"{gr_liv_area}")
+st.session_state.gr_liv_area = gr_liv_area
+
+if "garage_cars" not in st.session_state:
+    st.session_state["garage_cars"] = 2
+
+
 garage_cars = st.slider(
     "Size of garage in car capacity", min_value=0, max_value=5, value=2
 )
-st.write(f"{garage_cars}")
+st.session_state.garage_cars = garage_cars
+
+if "garage_area" not in st.session_state:
+    st.session_state["garage_area"] = 500
+
+
 garage_area = st.slider(
-    "Size of garage in square feet", min_value=0, max_value=1418, value=500
+    "Size of garage in square feet", min_value=0, max_value=1400, value=500
 )
-st.write(f"{garage_area}")
+st.session_state.garage_area = garage_area
+
 
 estimation_button = st.button("Click to estimate price")
 
 if estimation_button:
-    st.write(
-        f"Price: {model.predict(np.array([overal_qual, total_bsmt_sf, floor_1st_sf, gr_liv_area, garage_cars, garage_area]).reshape(1, -1))[0]}$"
+    predicted_price = model.predict(
+        np.array(
+            [
+                overal_qual,
+                total_bsmt_sf,
+                floor_1st_sf,
+                gr_liv_area,
+                garage_cars,
+                garage_area,
+            ]
+        ).reshape(1, -1)
+    )[0]
+
+    df_new = pd.DataFrame(
+        {
+            "overal_qual": [overal_qual],
+            "total_bsmt_sf": [total_bsmt_sf],
+            "floor_1st_sf": [floor_1st_sf],
+            "gr_liv_area": [gr_liv_area],
+            "garage_cars": [garage_cars],
+            "garage_area": [garage_area],
+            "sale_price": [predicted_price],
+        }
     )
+    st.session_state.mdf = pd.concat([st.session_state.mdf, df_new], axis=0)
+    st.write(f"Price: {predicted_price}$")
+    st.dataframe(st.session_state.mdf)
