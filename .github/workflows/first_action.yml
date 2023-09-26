@@ -10,14 +10,11 @@ jobs:
 
       - name: Create text file
         run: |
-          echo "This is the content of the file" > file1.txt
+          echo "This is the content of the file fdsfsdfsdfsdfsdfdsf" > file2.txt
           mv file1.txt $GITHUB_WORKSPACE/
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
         with:
-          commit_message: Changed files
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: pdfs
-          path: ./
+          name: code-coverage-report
+          path: output/test/code-coverage.html
