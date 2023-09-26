@@ -10,14 +10,14 @@ jobs:
 
       - name: Create text file
         run: |
-          echo "This is the content of the file fdsfsdfsdfsdfsdfdsf" > file3.txt
-          mv file3.txt $GITHUB_WORKSPACE/
+          echo "This is the content of the file fdsfsdfsdfsdfsdfdsf" > file4.txt
+          mv file4.txt $GITHUB_WORKSPACE/
 
       - name: Archive code
         uses: actions/upload-artifact@v3
         with:
           name: code-report
-          path: ./file3.txt
+          path: ../file4.txt
 
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
