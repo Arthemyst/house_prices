@@ -11,7 +11,7 @@ jobs:
       - name: Create text file
         run: |
           echo "This is the content of the file" > file1.txt
-          mv file.txt $GITHUB_WORKSPACE/
+          mv file1.txt $GITHUB_WORKSPACE/
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
