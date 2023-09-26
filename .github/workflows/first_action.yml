@@ -10,7 +10,5 @@ jobs:
 
       - name: Create text file
         run: |
-          current_datetime=$(python -c "from datetime import datetime; print(datetime.now().strftime('%Y%m%d%H%M%S'))")
-          filename="${current_datetime}.txt"
-          echo "This is the content of the file" > "$filename"
-          mv "$filename" $GITHUB_WORKSPACE/
+          echo "This is the content of the file" > file.txt
+          mv file.txt $GITHUB_WORKSPACE/
