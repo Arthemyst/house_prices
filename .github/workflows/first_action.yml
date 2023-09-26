@@ -10,8 +10,7 @@ jobs:
 
       - name: Create text file
         run: |
-          branch_sha=$(git rev-parse --short HEAD)
           current_datetime=$(date +"%Y%m%d%H%M%S")
-          filename="${branch_sha}_${current_datetime}.txt"
+          filename="${current_datetime}.txt"
           echo "This is the content of the file" > "$filename"
           mv "$filename" $GITHUB_WORKSPACE/
