@@ -15,5 +15,5 @@ jobs:
 
       - name: Save file
         run: |
-          echo "hello" > output.txt
+          touch "hello" > output.txt
         working-directory: ${{ github.workspace }}
