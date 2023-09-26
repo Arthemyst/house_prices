@@ -3,8 +3,17 @@ on: [push,workflow_dispatch]
 jobs:
   first-job:
     runs-on: self-hosted
+
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Print goodbye
-        run: echo "Done - bye!"
+
+      - name: Set up Java
+        run: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Save file
+        run: |
+          echo "hello" > output.txt
+        working-directory: ${{ github.workspace }}
