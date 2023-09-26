@@ -4,7 +4,7 @@ jobs:
   first-job:
     runs-on: self-hosted
     steps:
-      - name: Print greeting
-        run: echo "hello World!"
+      - name: Get Code
+        run: actions/checkout@v3
       - name: Print goodbye
         run: echo "Done - bye!"
