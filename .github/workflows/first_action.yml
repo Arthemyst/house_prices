@@ -11,4 +11,4 @@ jobs:
       - name: Create text file
         run: |
           echo "This is the content of the file fdsfsdfsdfsdfsdfdsf" > file4.txt
-          paths: ./
+        paths: ./
