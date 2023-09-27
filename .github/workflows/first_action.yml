@@ -1,13 +1,48 @@
 name: First Workflow
 on: [push,workflow_dispatch]
+
 jobs:
-  first-job:
+  build:
     runs-on: self-hosted
 
     steps:
-      - name: Get Code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Create text file
-        run: |
-          echo "This is the content of the file fdsfsdfsdfsdfsdfdsf" > ./file4.txt
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-version: '17' # Replace with the desired Java version
+
+    - name: Check Java Version
+      run: |
+        java -version
+        java -version 2>&1 | awk -F '"' '/version/ {print $2}' > java_version.txt
+        cat java_version.txt
+
+    - name: Run JAR File and Save Output
+      run: |
+        java -jar your.jar > output.txt # Save the output to a text file
+      continue-on-error: true # Continue even if the JAR exits with an error
+
+    - name: Modify Output File
+      run: |
+        # Modify the content of output.txt (replace "old content" with your modifications)
+        echo "Modified content" > modified_output.txt
+      shell: bash # Use the bash shell
+
+    - name: Upload Modified Output Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: modified-output
+        path: modified_output.txt # Upload the modified output as an artifact
+
+    - name: Download Modified Output Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: modified-output # Name of the artifact to download
+
+    - name: Display Modified Output
+      run: |
+        cat modified_output.txt # Display the modified content
