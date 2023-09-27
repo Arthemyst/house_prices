@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'adopt'
-        java-version: '17' # Replace with the desired Java version
+        java-version: '17'
 
     - name: Check Java Version
       run: |
@@ -24,25 +24,24 @@ jobs:
     - name: Run JAR File and Save Output
       run: |
         echo "Modified content" > output.txt
-      continue-on-error: true # Continue even if the JAR exits with an error
+      continue-on-error: true
 
     - name: Modify Output File
       run: |
-        # Modify the content of output.txt (replace "old content" with your modifications)
+        # Modify the content of output.txt
         echo "Modified content" > modified_output.txt
-      shell: bash # Use the bash shell
+      shell: bash
 
     - name: Upload Modified Output Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: modified-output
-        path: modified_output.txt # Upload the modified output as an artifact
-
+        path: modified_output.txt
     - name: Download Modified Output Artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: modified-output # Name of the artifact to download
+        name: modified-output
 
     - name: Display Modified Output
       run: |
-        cat modified_output.txt # Display the modified content
+        cat modified_output.txt
