@@ -26,6 +26,10 @@ jobs:
         echo "Modified content" > output.txt
       continue-on-error: true
 
+    - name: Print output file
+      run: |
+        cat output.txt
+
     - name: Modify Output File
       run: |
         # Modify the content of output.txt
