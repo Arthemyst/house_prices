@@ -23,7 +23,7 @@ jobs:
 
     - name: Run JAR File and Save Output
       run: |
-        java -jar your.jar > output.txt # Save the output to a text file
+        echo "Modified content" > output.txt
       continue-on-error: true # Continue even if the JAR exits with an error
 
     - name: Modify Output File
