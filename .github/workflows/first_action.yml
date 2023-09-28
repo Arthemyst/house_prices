@@ -3,7 +3,7 @@ on: [push,workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
@@ -24,45 +24,60 @@ jobs:
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > output.txt
-      continue-on-error: true
-
-    - name: Print output file
-      run: |
-        cat output.txt
+        echo "Original content" > output.csv
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > modified_output.txt
-      shell: bash
+        echo "Modified content" > modified_output.csv
 
-    - name: Upload Modified Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: modified-output
-        path: modified_output.txt
+    - name: Third Output File
+      run: |
+        echo "Third content" > third_output.csv
 
-    - name: Download Modified Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: modified-output
+    - name: Forth Output File
+      run: |
+        echo "blob content" > forth-output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
         name: original-output
-        path: output.txt
+        path: output.csv
+
+    - name: Upload Modified Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: modified-output
+        path: modified_output.csv
+
+    - name: Upload Third Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: third_output
+        path: third_output.csv
+
+    - name: Upload forth Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: forth-output
+        path: forth-output.blob
 
     - name: Download Original Output Artifact
       uses: actions/download-artifact@v3
       with:
         name: original-output
 
+    - name: Download Modified Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: modified-output
 
-    - name: Display Modified Output
-      run: |
-        cat modified_output.txt
+    - name: Download Third Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: third_output
 
-    - name: Display Original Output
-      run: |
-        cat output.txt
+    - name: Download forth Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: forth_output
