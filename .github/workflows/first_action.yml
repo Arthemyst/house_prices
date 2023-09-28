@@ -24,7 +24,7 @@ jobs:
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Modified content" > output.txt
+        echo "Original content" > output.txt
       continue-on-error: true
 
     - name: Print output file
@@ -41,11 +41,28 @@ jobs:
       with:
         name: modified-output
         path: modified_output.txt
+
     - name: Download Modified Output Artifact
       uses: actions/download-artifact@v3
       with:
         name: modified-output
 
+    - name: Upload original Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: original-output
+        path: output.txt
+
+    - name: Download Original Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: original-output
+
+
     - name: Display Modified Output
       run: |
         cat modified_output.txt
+
+    - name: Display Original Output
+      run: |
+        cat output.txt
