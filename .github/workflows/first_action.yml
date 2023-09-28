@@ -36,7 +36,7 @@ jobs:
 
     - name: Forth Output File
       run: |
-        echo "blob content" > forth-output.csv
+        echo "blob content" > forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
@@ -53,14 +53,14 @@ jobs:
     - name: Upload Third Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: third_output
+        name: third-output
         path: third_output.csv
 
     - name: Upload forth Artifact
       uses: actions/upload-artifact@v3
       with:
         name: forth-output
-        path: forth-output.csv
+        path: forth_output.blob
 
     - name: Download Original Output Artifact
       uses: actions/download-artifact@v3
@@ -75,9 +75,9 @@ jobs:
     - name: Download Third Output Artifact
       uses: actions/download-artifact@v3
       with:
-        name: third_output
+        name: third-output
 
     - name: Download forth Artifact
       uses: actions/download-artifact@v3
       with:
-        name: forth_output
+        name: forth-output
