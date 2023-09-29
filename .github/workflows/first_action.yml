@@ -19,8 +19,7 @@ jobs:
     - name: Check Java Version
       run: |
         java -version
-        java -version 2>&1 | awk -F '"' '/version/ {print $2}' > java_version.txt
-        cat java_version.txt
+
 
     - name: Run JAR File and Save Output
       run: |
