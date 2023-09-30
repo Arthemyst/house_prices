@@ -1,91 +1,9 @@
-name: First Workflow
-on: [push,workflow_dispatch]
-
-jobs:
-  build:
-    runs-on: self-hosted
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
-
-
-    - name: Run JAR File and Save Output
-      run: |
-        echo "Original content" > output.csv
-
-    - name: Modify Output File
-      run: |
-        echo "Modified content" > modified_output.csv
-
-    - name: Third Output File
-      run: |
-        echo "Third content" > third_output.csv
-
-    - name: Forth Output File
-      run: |
-        echo "blob content" > forth_output.blob
-
-    - name: Upload original Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: output.csv
-        path: output.csv
-
-    - name: Upload Modified Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: modified_output.csv
-        path: modified_output.csv
-
-    - name: Upload Third Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: third-output.csv
-        path: third_output.csv
-
-    - name: Upload forth Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: forth-output.blob
-        path: forth_output.blob
-
-    - name: Download Original Output Artifact
-      uses: actions/download-artifact@v3
-
-
-#    - name: Download Modified Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: modified_output.csv
-#
-#    - name: Download Third Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: third_output.csv
-#
-#    - name: Download forth Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: forth_output.blob
-#
 #name: First Workflow
-#on: [push, workflow_dispatch]
+#on: [push,workflow_dispatch]
 #
 #jobs:
 #  build:
-#    runs-on: ubuntu-latest
+#    runs-on: self-hosted
 #
 #    steps:
 #    - name: Checkout code
@@ -101,6 +19,7 @@ jobs:
 #    - name: Check Java Version
 #      run: |
 #        java -version
+#
 #
 #    - name: Run JAR File and Save Output
 #      run: |
@@ -121,63 +40,144 @@ jobs:
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
-#        name: original-output
+#        name: output.csv
 #        path: output.csv
 #
 #    - name: Upload Modified Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
-#        name: modified-output
+#        name: modified_output.csv
 #        path: modified_output.csv
 #
 #    - name: Upload Third Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
-#        name: third-output
+#        name: third-output.csv
 #        path: third_output.csv
 #
 #    - name: Upload forth Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
-#        name: forth-output
+#        name: forth-output.blob
 #        path: forth_output.blob
 #
-#  download_original:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
 #    - name: Download Original Output Artifact
 #      uses: actions/download-artifact@v3
-#      with:
-#        name: original-output
-#
-#  download_modified:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Download Modified Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: modified-output
-#
-#  download_third:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Download Third Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: third-output
-#
-#  download_forth:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Download Forth Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: forth-output
-#
+
+
+    - name: Download Modified Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: modified_output.csv
+
+    - name: Download Third Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: third_output.csv
+
+    - name: Download forth Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: forth_output.blob
+
+name: First Workflow
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
+    - name: Check Java Version
+      run: |
+        java -version
+
+    - name: Run JAR File and Save Output
+      run: |
+        echo "Original content" > output.csv
+
+    - name: Modify Output File
+      run: |
+        echo "Modified content" > modified_output.csv
+
+    - name: Third Output File
+      run: |
+        echo "Third content" > third_output.csv
+
+    - name: Forth Output File
+      run: |
+        echo "blob content" > forth_output.blob
+
+    - name: Upload original Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: original-output
+        path: output.csv
+
+    - name: Upload Modified Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: modified-output
+        path: modified_output.csv
+
+    - name: Upload Third Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: third-output
+        path: third_output.csv
+
+    - name: Upload forth Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: forth-output
+        path: forth_output.blob
+
+  download_original:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Original Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: original-output
+
+  download_modified:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Modified Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: modified-output
+
+  download_third:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Third Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: third-output
+
+  download_forth:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Forth Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: forth-output
+
 
 
 #name: First Workflow
