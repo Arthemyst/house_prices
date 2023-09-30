@@ -20,7 +20,6 @@ jobs:
       run: |
         java -version
 
-
     - name: Run JAR File and Save Output
       run: |
         echo "Original content" > output.csv
@@ -48,41 +47,41 @@ jobs:
       with:
         name: modified_output.csv
         path: modified_output.csv
-#
-#    - name: Upload Third Output Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: third-output.csv
-#        path: third_output.csv
-#
-#    - name: Upload forth Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: forth-output.blob
-#        path: forth_output.blob
 
-#    - name: Download Original Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: output.csv
-#
-#    - name: Download Modified Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: modified_output.csv
-#
-#    - name: Download Third Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: third_output.csv
-#
-#    - name: Download forth Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: forth_output.blob
+    - name: Upload Third Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: third-output.csv
+        path: third_output.csv
 
-    - name: Download all outputs Artifact
+    - name: Upload forth Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: forth-output.blob
+        path: forth_output.blob
+
+    - name: Download Original Output Artifact
       uses: actions/download-artifact@v3
+      with:
+        name: output.csv
+
+    - name: Download Modified Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: modified_output.csv
+
+    - name: Download Third Output Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: third_output.csv
+
+    - name: Download forth Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: forth_output.blob
+
+#    - name: Download all outputs Artifact
+#      uses: actions/download-artifact@v3
 
 
 
