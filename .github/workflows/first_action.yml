@@ -20,6 +20,9 @@ jobs:
       run: |
         java -version
 
+    - name: Create Images Directory
+      run: mkdir files
+
     - name: Run JAR File and Save Output
       run: |
         echo "Original content" > ./files/output.csv
@@ -40,7 +43,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: files
-        path: .files
+        path: ./files
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
