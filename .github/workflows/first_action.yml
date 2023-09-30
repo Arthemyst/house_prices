@@ -1,41 +1,46 @@
-#name: First Workflow
-#on: [push,workflow_dispatch]
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - name: Checkout code
-#      uses: actions/checkout@v3
-#
-#    - name: Set up Java
-#      uses: actions/setup-java@v3
-#      with:
-#        distribution: 'adopt'
-#        java-package: jre
-#        java-version: '17'
-#
-#    - name: Check Java Version
-#      run: |
-#        java -version
-#
-#    - name: Run JAR File and Save Output
-#      run: |
-#        echo "Original content" > output.csv
-#
-#    - name: Modify Output File
-#      run: |
-#        echo "Modified content" > modified_output.csv
-#
-#    - name: Third Output File
-#      run: |
-#        echo "Third content" > third_output.csv
-#
-#    - name: Forth Output File
-#      run: |
-#        echo "blob content" > forth_output.blob
-#
+name: First Workflow
+on: [push,workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
+    - name: Check Java Version
+      run: |
+        java -version
+
+    - name: Run JAR File and Save Output
+      run: |
+        echo "Original content" > ./files/output.csv
+
+    - name: Modify Output File
+      run: |
+        echo "Modified content" > ./files/modified_output.csv
+
+    - name: Third Output File
+      run: |
+        echo "Third content" > ./files/third_output.csv
+
+    - name: Forth Output File
+      run: |
+        echo "blob content" > ./files/forth_output.blob
+
+    - name: Upload original Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: files
+        path: .files
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
@@ -86,159 +91,159 @@
 #      uses: actions/download-artifact@v3
 
 
+#
+#
+#name: Second Workflow
+#on: [push, workflow_dispatch]
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+#    - name: Set up Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'adopt'
+#        java-package: jre
+#        java-version: '17'
+#
+#    - name: Check Java Version
+#      run: |
+#        java -version
+#
+#
+#  download_original:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+#    - name: Set up Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'adopt'
+#        java-package: jre
+#        java-version: '17'
+#
+#    - name: Check Java Version
+#      run: |
+#        java -version
+#
+#
+#    - name: Run JAR File and Save Output
+#      run: |
+#        echo "Original content" > output.csv
+#
+#    - name: Upload original Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: output.csv
+#        path: output.csv
+#
+#
+#  download_modified:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+#    - name: Set up Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'adopt'
+#        java-package: jre
+#        java-version: '17'
+#
+#    - name: Check Java Version
+#      run: |
+#        java -version
+#
+#
+#    - name: Modify Output File
+#      run: |
+#        echo "Modified content" > modified_output.csv
+#
+#    - name: Upload Modified Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: modified_output.csv
+#        path: modified_output.csv
+#
+#
+#  download_third:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+#    - name: Set up Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'adopt'
+#        java-package: jre
+#        java-version: '17'
+#
+#    - name: Check Java Version
+#      run: |
+#        java -version
+#
+#
+#    - name: Third Output File
+#      run: |
+#        echo "Third content" > third_output.csv
+#
+#    - name: Upload Third Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: third_output.csv
+#        path: third_output.csv
+#
+#
+#  download_forth:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+#    - name: Set up Java
+#      uses: actions/setup-java@v3
+#      with:
+#        distribution: 'adopt'
+#        java-package: jre
+#        java-version: '17'
+#
+#    - name: Check Java Version
+#      run: |
+#        java -version
+#
+#
+#    - name: Forth Output File
+#      run: |
+#        echo "blob content" > forth_output.blob
+#
+#    - name: Upload forth Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: forth_output.blob
+#        path: forth_output.blob
+#
 
 
-name: Second Workflow
-on: [push, workflow_dispatch]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
 
 
-  download_original:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
-
-
-    - name: Run JAR File and Save Output
-      run: |
-        echo "Original content" > output.csv
-
-    - name: Upload original Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: original-output
-        path: output.csv
-
-
-  download_modified:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
-
-
-    - name: Modify Output File
-      run: |
-        echo "Modified content" > modified_output.csv
-
-    - name: Upload Modified Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: modified-output
-        path: modified_output.csv
-
-
-  download_third:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
-
-
-    - name: Third Output File
-      run: |
-        echo "Third content" > third_output.csv
-
-    - name: Upload Third Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: third-output
-        path: third_output.csv
-
-
-  download_forth:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-package: jre
-        java-version: '17'
-
-    - name: Check Java Version
-      run: |
-        java -version
-
-
-    - name: Forth Output File
-      run: |
-        echo "blob content" > forth_output.blob
-
-    - name: Upload forth Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: forth-output
-        path: forth_output.blob
-
-
-
-
-
-#name: First Workflow
+#name: Third Workflow
 #on: [push, workflow_dispatch]
 #
 #jobs:
