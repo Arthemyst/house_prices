@@ -10,7 +10,7 @@ jobs:
 
     - name: Get current date
       id: date
-      run: echo "::set-output name=date::$(date+'%Y/%m/%d-%H-%M-%S')"
+      run: echo "DATETIME=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
 
     - name: Set up Java
       uses: actions/setup-java@v3
@@ -24,29 +24,29 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir ./${{ github.sha }}_${{ steps.date.outputs.date }}_files
+      run: mkdir ./${{ github.sha }}_$DATETIME_files
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > ./${{ github.sha }}_${{ steps.date.outputs.date }}_files/${{ github.sha }}_${{ steps.date.outputs.date }}_output_.csv
+        echo "Original content" > ./${{ github.sha }}_$DATETIME_files/${{ github.sha }}_$DATETIME_output_.csv
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > ./${{ github.sha }}_${{ steps.date.outputs.date }}_files/${{ github.sha }}_${{ steps.date.outputs.date }}_modified_output.csv
+        echo "Modified content" > ./${{ github.sha }}_$DATETIME_files/${{ github.sha }}_$DATETIME_modified_output.csv
 
     - name: Third Output File
       run: |
-        echo "Third content" > ./${{ github.sha }}_${{ steps.date.outputs.date }}_files/${{ github.sha }}_${{ steps.date.outputs.date }}_third_output.csv
+        echo "Third content" > ./${{ github.sha }}_$DATETIME_files/${{ github.sha }}_$DATETIME_third_output.csv
 
     - name: Forth Output File
       run: |
-        echo "blob content" > ./${{ github.sha }}_${{ steps.date.outputs.date }}_files/${{ github.sha }}_${{ steps.date.outputs.date }}_forth_output.blob
+        echo "blob content" > ./${{ github.sha }}_$DATETIME_files/${{ github.sha }}_$DATETIME_forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.sha }}_${{ steps.date.outputs.date }}_files
-        path: ./${{ github.sha }}_${{ steps.date.outputs.date }}_files
+        name: ${{ github.sha }}_$DATETIME_files
+        path: ./${{ github.sha }}_$DATETIME_files
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
