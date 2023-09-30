@@ -102,21 +102,54 @@ jobs:
       run: |
         java -version
 
+#    - name: Run JAR File and Save Output
+#      run: |
+#        echo "Original content" > output.csv
+#
+#    - name: Modify Output File
+#      run: |
+#        echo "Modified content" > modified_output.csv
+
+#    - name: Third Output File
+#      run: |
+#        echo "Third content" > third_output.csv
+
+#    - name: Forth Output File
+#      run: |
+#        echo "blob content" > forth_output.blob
+
+#    - name: Upload original Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: original-output
+#        path: output.csv
+
+#    - name: Upload Modified Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: modified-output
+#        path: modified_output.csv
+
+#    - name: Upload Third Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: third-output
+#        path: third_output.csv
+
+#    - name: Upload forth Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: forth-output
+#        path: forth_output.blob
+
+  download_original:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
     - name: Run JAR File and Save Output
       run: |
         echo "Original content" > output.csv
-
-    - name: Modify Output File
-      run: |
-        echo "Modified content" > modified_output.csv
-
-    - name: Third Output File
-      run: |
-        echo "Third content" > third_output.csv
-
-    - name: Forth Output File
-      run: |
-        echo "blob content" > forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
@@ -124,28 +157,6 @@ jobs:
         name: original-output
         path: output.csv
 
-    - name: Upload Modified Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: modified-output
-        path: modified_output.csv
-
-    - name: Upload Third Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: third-output
-        path: third_output.csv
-
-    - name: Upload forth Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: forth-output
-        path: forth_output.blob
-
-  download_original:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
     - name: Download Original Output Artifact
       uses: actions/download-artifact@v3
       with:
@@ -155,6 +166,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+    - name: Modify Output File
+      run: |
+        echo "Modified content" > modified_output.csv
+
+    - name: Upload Modified Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: modified-output
+        path: modified_output.csv
+
     - name: Download Modified Output Artifact
       uses: actions/download-artifact@v3
       with:
@@ -164,6 +186,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Third Output File
+      run: |
+        echo "Third content" > third_output.csv
+
+    - name: Upload Third Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: third-output
+        path: third_output.csv
     - name: Download Third Output Artifact
       uses: actions/download-artifact@v3
       with:
@@ -173,6 +204,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Forth Output File
+      run: |
+        echo "blob content" > forth_output.blob
+
+    - name: Upload forth Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: forth-output
+        path: forth_output.blob
+
     - name: Download Forth Artifact
       uses: actions/download-artifact@v3
       with:
