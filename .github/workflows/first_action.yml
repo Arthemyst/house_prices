@@ -24,7 +24,7 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir ${{ github.sha }}_${{ steps.date.outputs.date }}_files
+      run: mkdir ./${{ github.sha }}_${{ steps.date.outputs.date }}_files
 
     - name: Run JAR File and Save Output
       run: |
