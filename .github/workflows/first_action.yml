@@ -21,29 +21,29 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir ${{ github.sha }}_files
+      run: mkdir ${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_files
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > ./${{ github.sha }}_files/${{ github.sha }}_output_.csv
+        echo "Original content" > ./${{ github.sha }}_files/${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_output_.csv
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > ./${{ github.sha }}_files/${{ github.sha }}_modified_output.csv
+        echo "Modified content" > ./${{ github.sha }}_files/${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_modified_output.csv
 
     - name: Third Output File
       run: |
-        echo "Third content" > ./${{ github.sha }}_files/${{ github.sha }}_third_output.csv
+        echo "Third content" > ./${{ github.sha }}_files/${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_third_output.csv
 
     - name: Forth Output File
       run: |
-        echo "blob content" > ./${{ github.sha }}_files/${{ github.sha }}_forth_output.blob
+        echo "blob content" > ./${{ github.sha }}_files/${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.sha }}_files
-        path: ./${{ github.sha }}_files
+        name: ${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_files
+        path: ./${{ github.sha }}_$(date +'%Y-%m-%d %H:%M:%S')_files
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
