@@ -28,19 +28,19 @@ jobs:
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_output_.csv
+        echo "Original content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/output_.csv
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_modified_output.csv
+        echo "Modified content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/modified_output.csv
 
     - name: Third Output File
       run: |
-        echo "Third content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_third_output.csv
+        echo "Third content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/third_output.csv
 
     - name: Forth Output File
       run: |
-        echo "blob content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_forth_output.blob
+        echo "blob content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
