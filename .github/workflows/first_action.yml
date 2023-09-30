@@ -1,5 +1,8 @@
 name: First Workflow
-on: [push,workflow_dispatch]
+on:
+  push:
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,77 +27,29 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir ./${{ github.sha }}_${{ env.DATETIME }}_files
+      run: mkdir -p "./${{ github.sha }}_${{ env.DATETIME }}_files"
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/output_.csv
+        echo "Original content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/output_.csv"
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/modified_output.csv
+        echo "Modified content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/modified_output.csv"
 
     - name: Third Output File
       run: |
-        echo "Third content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/third_output.csv
+        echo "Third content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/third_output.csv"
 
     - name: Forth Output File
       run: |
-        echo "blob content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/forth_output.blob
+        echo "blob content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/forth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
         name: ${{ github.sha }}_${{ env.DATETIME }}_files
         path: ./${{ github.sha }}_${{ env.DATETIME }}_files
-#    - name: Upload original Output Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: output.csv
-#        path: output.csv
-#
-#    - name: Upload Modified Output Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: modified_output.csv
-#        path: modified_output.csv
-#
-#    - name: Upload Third Output Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: third_output.csv
-#        path: third_output.csv
-#
-#    - name: Upload forth Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: forth_output.blob
-#        path: forth_output.blob
-#################################
-# bez tego ponizej
-
-#    - name: Download Original Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: output.csv
-#
-#    - name: Download Modified Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: modified_output.csv
-#
-#    - name: Download Third Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: third_output.csv
-#
-#    - name: Download forth Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: forth_output.blob
-
-#    - name: Download all outputs Artifact
-#      uses: actions/download-artifact@v3
 
 
 #
