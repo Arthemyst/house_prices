@@ -63,8 +63,6 @@ jobs:
 
     - name: Download Original Output Artifact
       uses: actions/download-artifact@v3
-      with:
-        name: [output.csv,modified_output.csv, third_output.csv, forth_output.blob]
 
 
 #    - name: Download Modified Output Artifact
