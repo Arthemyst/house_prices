@@ -51,37 +51,37 @@ jobs:
     - name: Upload Third Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: third-output.csv
+        name: third_output.csv
         path: third_output.csv
 
     - name: Upload forth Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: forth-output.blob
+        name: forth_output.blob
         path: forth_output.blob
 
-    - name: Download Original Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: output.csv
-
-    - name: Download Modified Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: modified_output.csv
-
-    - name: Download Third Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: third_output.csv
-
-    - name: Download forth Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: forth_output.blob
-
-#    - name: Download all outputs Artifact
+#    - name: Download Original Output Artifact
 #      uses: actions/download-artifact@v3
+#      with:
+#        name: output.csv
+#
+#    - name: Download Modified Output Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: modified_output.csv
+#
+#    - name: Download Third Output Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: third_output.csv
+#
+#    - name: Download forth Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: forth_output.blob
+
+    - name: Download all outputs Artifact
+      uses: actions/download-artifact@v3
 
 
 
