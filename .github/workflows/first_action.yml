@@ -65,20 +65,20 @@
 #      uses: actions/download-artifact@v3
 
 
-    - name: Download Modified Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: modified_output.csv
-
-    - name: Download Third Output Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: third_output.csv
-
-    - name: Download forth Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: forth_output.blob
+#    - name: Download Modified Output Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: modified_output.csv
+#
+#    - name: Download Third Output Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: third_output.csv
+#
+#    - name: Download forth Artifact
+#      uses: actions/download-artifact@v3
+#      with:
+#        name: forth_output.blob
 
 name: First Workflow
 on: [push, workflow_dispatch]
