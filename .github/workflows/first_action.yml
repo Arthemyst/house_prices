@@ -116,9 +116,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
     - name: Check Java Version
       run: |
         java -version
+
 
     - name: Run JAR File and Save Output
       run: |
@@ -130,18 +141,26 @@ jobs:
         name: original-output
         path: output.csv
 
-#    - name: Download Original Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: original-output
 
   download_modified:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
     - name: Check Java Version
       run: |
         java -version
+
 
     - name: Modify Output File
       run: |
@@ -153,18 +172,26 @@ jobs:
         name: modified-output
         path: modified_output.csv
 
-#    - name: Download Modified Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: modified-output
 
   download_third:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
     - name: Check Java Version
       run: |
         java -version
+
 
     - name: Third Output File
       run: |
@@ -176,18 +203,26 @@ jobs:
         name: third-output
         path: third_output.csv
 
-#    - name: Download Third Output Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: third-output
 
   download_forth:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-package: jre
+        java-version: '17'
+
     - name: Check Java Version
       run: |
         java -version
+
 
     - name: Forth Output File
       run: |
@@ -199,10 +234,7 @@ jobs:
         name: forth-output
         path: forth_output.blob
 
-#    - name: Download Forth Artifact
-#      uses: actions/download-artifact@v3
-#      with:
-#        name: forth-output
+
 
 
 
