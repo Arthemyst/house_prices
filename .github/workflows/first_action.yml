@@ -24,29 +24,29 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files
+      run: mkdir ./${{ github.sha }}_${{ env.DATETIME }}_files
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files/${{ github.sha }}_${{ github.event.repository.updated_at}}_output_.csv
+        echo "Original content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_output_.csv
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files/${{ github.sha }}_${{ github.event.repository.updated_at}}_modified_output.csv
+        echo "Modified content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_modified_output.csv
 
     - name: Third Output File
       run: |
-        echo "Third content" > ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files/${{ github.sha }}_${{ github.event.repository.updated_at}}_third_output.csv
+        echo "Third content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_third_output.csv
 
     - name: Forth Output File
       run: |
-        echo "blob content" > ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files/${{ github.sha }}_${{ github.event.repository.updated_at}}_forth_output.blob
+        echo "blob content" > ./${{ github.sha }}_${{ env.DATETIME }}_files/${{ github.sha }}_${{ env.DATETIME }}_forth_output.blob
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.sha }}_${{ github.event.repository.updated_at}}_files
-        path: ./${{ github.sha }}_${{ github.event.repository.updated_at}}_files
+        name: ${{ github.sha }}_${{ env.DATETIME }}_files
+        path: ./${{ github.sha }}_${{ env.DATETIME }}_files
 #    - name: Upload original Output Artifact
 #      uses: actions/upload-artifact@v3
 #      with:
