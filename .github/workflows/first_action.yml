@@ -116,6 +116,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Check Java Version
+      run: |
+        java -version
+
     - name: Run JAR File and Save Output
       run: |
         echo "Original content" > output.csv
@@ -135,6 +139,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Check Java Version
+      run: |
+        java -version
 
     - name: Modify Output File
       run: |
@@ -155,6 +162,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Check Java Version
+      run: |
+        java -version
+
     - name: Third Output File
       run: |
         echo "Third content" > third_output.csv
@@ -174,6 +185,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Check Java Version
+      run: |
+        java -version
+
     - name: Forth Output File
       run: |
         echo "blob content" > forth_output.blob
