@@ -93,7 +93,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -113,7 +113,7 @@ jobs:
 
   download_original:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
 
     - name: Run JAR File and Save Output
@@ -133,7 +133,7 @@ jobs:
 
   download_modified:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
 
     - name: Modify Output File
@@ -153,7 +153,7 @@ jobs:
 
   download_third:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: Third Output File
       run: |
@@ -172,7 +172,7 @@ jobs:
 
   download_forth:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: Forth Output File
       run: |
