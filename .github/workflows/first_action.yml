@@ -20,8 +20,12 @@ jobs:
 
       run: |
         $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
-        echo "datetime=$datetime"
-        echo "datetime_env=$datetime" >> $GITHUB_ENV
+#        echo "datetime=$datetime"
+        echo "DATETIME=$datetime" >> $GITHUB_ENV
+
+    - name: Display Date and Time - datetime_env
+      run: |
+        echo "Current Date and Time: ${{ env.DATETIME }}"
 
     - name: Create Images Directory
       run: |
@@ -29,22 +33,22 @@ jobs:
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > "./${{github.sha}}_${{env.datetime_env}}_files/output_.csv"
+        echo "Original content" > "./${{github.sha}}_${{env.DATETIME}}_files/output_.csv"
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > "./${{github.sha}}_${{env.datetime_env}}_files/modified_output.csv"
+        echo "Modified content" > "./${{github.sha}}_${{env.DATETIME}}_files/modified_output.csv"
 
     - name: Third Output File
       run: |
-        echo "Third content" > "./${{github.sha}}_${{env.datetime_env}}_files/third_output.csv"
+        echo "Third content" > "./${{github.sha}}_${{env.DATETIME}}_files/third_output.csv"
 
     - name: Fourth Output File
       run: |
-        echo "blob content" > "./${{github.sha}}_${{env.datetime_env}}_files/fourth_output.blob"
+        echo "blob content" > "./${{github.sha}}_${{env.DATETIME}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "${{github.sha}}_${{env.datetime_env}}_files"
-        path: "./${{github.sha}}_${{env.datetime_env}}_files"
+        name: "${{github.sha}}_${{env.DATETIME}}_files"
+        path: "./${{github.sha}}_${{env.DATETIME}}_files"
