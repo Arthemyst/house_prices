@@ -34,30 +34,26 @@ jobs:
 #      run: |
 #        java -version
 #
-#    - name: Create Images Directory
-#      run: mkdir -p "./${{ github.sha }}__files"
-#
-#    - name: Run JAR File and Save Output
-#      run: |
-#        echo "Original content" > "./${{ github.sha }}__files/output_.csv"
-#
-#    - name: Modify Output File
-#      run: |
-#        echo "Modified content" > "./${{ github.sha }}__files/modified_output.csv"
-#
-#    - name: Third Output File
-#      run: |
-#        echo "Third content" > "./${{ github.sha }}__files/third_output.csv"
-#
-#    - name: Forth Output File
-#      run: |
-#        echo "blob content" > "./${{ github.sha }}__files/forth_output.blob"
-#
-#    - name: Upload original Output Artifact
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: ${{ github.sha }}__files
-#        path: ./${{ github.sha }}__files
+- name: Create Images Directory
+      run: mkdir -p "./${env:GITHUB_SHA}_${env:DATETIME}_files"
+
+    - name: Run JAR File and Save Output
+      run: echo "Original content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/output_.csv"
+
+    - name: Modify Output File
+      run: echo "Modified content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/modified_output.csv"
+
+    - name: Third Output File
+      run: echo "Third content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/third_output.csv"
+
+    - name: Fourth Output File
+      run: echo "blob content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/fourth_output.blob"
+
+    - name: Upload original Output Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "${env:GITHUB_SHA}_${env:DATETIME}_files"
+        path: "./${env:GITHUB_SHA}_${env:DATETIME}_files"
 
 
 #
