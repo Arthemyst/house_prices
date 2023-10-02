@@ -20,8 +20,7 @@ jobs:
         $DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
         echo "DATETIME=$env:DATETIME" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-    - name: Set up PowerShell
-      shell: powershell
+
 
 
 #
