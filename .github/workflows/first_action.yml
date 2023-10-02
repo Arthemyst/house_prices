@@ -18,7 +18,7 @@ jobs:
     - name: Set Datetime
       id: datetime
       run: |
-        $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
+        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
         echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
 
     - name: Set directory name
