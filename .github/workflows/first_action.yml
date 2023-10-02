@@ -13,14 +13,9 @@ jobs:
 
     - name: Set Date
       id: set_date
-#      run: |
-#        $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
-#        Write-Output "datetime=$datetime"
-#        echo "::set-output name=datetime::$datetime"
-
       run: |
         $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
-#        echo "datetime=$datetime"
+        echo "datetime=$datetime"
         echo "DATETIME=$datetime" >> $GITHUB_ENV
 
     - name: Display Date and Time - datetime_env
