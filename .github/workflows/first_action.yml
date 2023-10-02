@@ -18,10 +18,6 @@ jobs:
         echo "$datetime"
         echo "DATETIME={ $datetime }" >> $GITHUB_ENV
 
-    - name: List All Environment Variables
-      run: |
-        set
-
     - name: Display Date and Time - datetime_env
       run: |
         echo "Current Date and Time: ${{ env.DATETIME }}"
