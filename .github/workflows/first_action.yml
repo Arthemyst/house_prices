@@ -14,7 +14,7 @@ jobs:
     - name: Set Date
       id: set_date
       run: |
-        $datetime = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+        $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
         Write-Output "datetime=$datetime"
         echo "::set-output name=datetime::$datetime"
 
