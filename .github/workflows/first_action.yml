@@ -20,7 +20,7 @@ jobs:
 
     - name: List All Environment Variables
       run: |
-        env
+        set
 
     - name: Display Date and Time - datetime_env
       run: |
