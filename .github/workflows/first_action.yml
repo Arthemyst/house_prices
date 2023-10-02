@@ -11,8 +11,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set Date
-      id: set_date
+#    - name: Set Datetime
+#      id: datetime
+#      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+
+    - name: Set Datetime
+      id: datetime
       run: |
         $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
         echo "$datetime"
