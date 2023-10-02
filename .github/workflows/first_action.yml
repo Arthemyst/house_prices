@@ -14,14 +14,16 @@ jobs:
     - name: Get current date
       id: datetime
 #      run: |
-#        $env.DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
-#        echo "DATETIME=$env.DATETIME" >> $GITHUB_ENV
+#        $env:DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
+#        echo "DATETIME=$env:DATETIME" >> $GITHUB_ENV
       run: |
-        $env.DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
-        echo "DATETIME=$env.DATETIME" | Out-File -FilePath $env:GITHUB_ENV -Append
+        $DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
+        echo "DATETIME=$env:DATETIME" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-    - name: Print DATETIME
-      run: echo "Current DATETIME is $env.DATETIME"
+    - name: Set up PowerShell
+      shell: powershell
+
+
 #
 #    - name: Set up Java
 #      uses: actions/setup-java@v3
@@ -35,25 +37,35 @@ jobs:
 #        java -version
 #
     - name: Create Images Directory
-      run: mkdir -p "./${{ github.sha }}_${{env.DATETIME}}_files"
+      run: |
+        $DATETIME = $env:DATETIME
+        mkdir -p "./${{ github.sha }}_${{DATETIME}}_files"
 
     - name: Run JAR File and Save Output
-      run: echo "Original content" > "./${{ github.sha }}_${{env.DATETIME}}_files/output_.csv"
+      run: |
+        $DATETIME = $env:DATETIME
+        echo "Original content" > "./${{ github.sha }}_${{DATETIME}}_files/output_.csv"
 
     - name: Modify Output File
-      run: echo "Modified content" > "./${{ github.sha }}_${{env.DATETIME}}_files/modified_output.csv"
+      run: |
+        $DATETIME = $env:DATETIME
+        echo "Modified content" > "./${{ github.sha }}_${{DATETIME}}_files/modified_output.csv"
 
     - name: Third Output File
-      run: echo "Third content" > "./${{ github.sha }}_${{env.DATETIME}}_files/third_output.csv"
+      run: |
+        $DATETIME = $env:DATETIME
+        echo "Third content" > "./${{ github.sha }}_${{DATETIME}}_files/third_output.csv"
 
     - name: Fourth Output File
-      run: echo "blob content" > "./${{ github.sha }}_${{env.DATETIME}}_files/fourth_output.blob"
+      run: |
+        $DATETIME = $env:DATETIME
+        echo "blob content" > "./${{ github.sha }}_${{DATETIME}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: "${{ github.sha }}_${{env.DATETIME}}_files"
-        path: "./${{ github.sha }}_${{env.DATETIME}}_files"
+        name: "${{ github.sha }}_${{env:DATETIME}}_files"
+        path: "./${{ github.sha }}_${{env:DATETIME}}_files"
 
 
 #
