@@ -17,6 +17,9 @@ jobs:
         $env:DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
         echo "DATETIME=$env:DATETIME" >> $GITHUB_ENV
 
+  - name: Print DATETIME
+    run: echo "Current DATETIME is $DATETIME"
+
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
