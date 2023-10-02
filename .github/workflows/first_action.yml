@@ -29,29 +29,29 @@ jobs:
         java -version
 
     - name: Create Images Directory
-      run: mkdir -p "./${{ github.sha }}_${{ env.DATETIME }}_files"
+      run: mkdir -p "./${{ github.sha }}_$DATETIME_files"
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/output_.csv"
+        echo "Original content" > "./${{ github.sha }}_$DATETIME_files/output_.csv"
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/modified_output.csv"
+        echo "Modified content" > "./${{ github.sha }}_$DATETIME_files/modified_output.csv"
 
     - name: Third Output File
       run: |
-        echo "Third content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/third_output.csv"
+        echo "Third content" > "./${{ github.sha }}_$DATETIME_files/third_output.csv"
 
     - name: Forth Output File
       run: |
-        echo "blob content" > "./${{ github.sha }}_${{ env.DATETIME }}_files/forth_output.blob"
+        echo "blob content" > "./${{ github.sha }}_$DATETIME_files/forth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.sha }}_${{ env.DATETIME }}_files
-        path: ./${{ github.sha }}_${{ env.DATETIME }}_files
+        name: ${{ github.sha }}_$DATETIME_files
+        path: ./${{ github.sha }}_$DATETIME_files
 
 
 #
