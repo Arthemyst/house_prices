@@ -35,25 +35,25 @@ jobs:
 #        java -version
 #
     - name: Create Images Directory
-      run: mkdir -p "./${env:GITHUB_SHA}_${env:DATETIME}_files"
+      run: mkdir -p "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files"
 
     - name: Run JAR File and Save Output
-      run: echo "Original content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/output_.csv"
+      run: echo "Original content" > "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files/output_.csv"
 
     - name: Modify Output File
-      run: echo "Modified content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/modified_output.csv"
+      run: echo "Modified content" > "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files/modified_output.csv"
 
     - name: Third Output File
-      run: echo "Third content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/third_output.csv"
+      run: echo "Third content" > "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files/third_output.csv"
 
     - name: Fourth Output File
-      run: echo "blob content" > "./${env:GITHUB_SHA}_${env:DATETIME}_files/fourth_output.blob"
+      run: echo "blob content" > "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: "${env:GITHUB_SHA}_${env:DATETIME}_files"
-        path: "./${env:GITHUB_SHA}_${env:DATETIME}_files"
+        name: "${{env:GITHUB_SHA}}_${{env:DATETIME}}_files"
+        path: "./${{env:GITHUB_SHA}}_${{env:DATETIME}}_files"
 
 
 #
