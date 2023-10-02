@@ -15,8 +15,7 @@ jobs:
       uses: josStorer/get-current-time@v2
       id: current-time
       with:
-        format: YYYY-MM-DD-HH
-  #      utcOffset: "+08:00"
+        format: YYYY-MM-DD
 
     - name: Create Images Directory
       run: |
