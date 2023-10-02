@@ -16,7 +16,7 @@ jobs:
       run: |
         $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
         echo "$datetime"
-        echo "DATETIME={ $datetime }" >> $GITHUB_ENV
+        echo "DATETIME=$datetime" >> $GITHUB_ENV
 
     - name: Display Date and Time - datetime_env
       run: |
