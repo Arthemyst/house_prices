@@ -28,33 +28,33 @@ jobs:
     - name: Create Images Directory
       run: |
         $DATETIME = $env:DATETIME
-        mkdir -p "./${{github.sha}}_${{env:DATETIME}}_files"
+        mkdir -p "./${{github.sha}}_${{DATETIME}}_files"
 
     - name: Run JAR File and Save Output
       run: |
         $DATETIME = $env:DATETIME
-        echo "Original content" > "./${{github.sha}}_${{env:DATETIME}}_files/output_.csv"
+        echo "Original content" > "./${{github.sha}}_${{DATETIME}}_files/output_.csv"
 
     - name: Modify Output File
       run: |
         $DATETIME = $env:DATETIME
-        echo "Modified content" > "./${{github.sha}}_${{env:DATETIME}}_files/modified_output.csv"
+        echo "Modified content" > "./${{github.sha}}_${{DATETIME}}_files/modified_output.csv"
 
     - name: Third Output File
       run: |
         $DATETIME = $env:DATETIME
-        echo "Third content" > "./${{github.sha}}_${{env:DATETIME}}_files/third_output.csv"
+        echo "Third content" > "./${{github.sha}}_${{DATETIME}}_files/third_output.csv"
 
     - name: Fourth Output File
       run: |
         $DATETIME = $env:DATETIME
-        echo "blob content" > "./${{github.sha}}_${{env:DATETIME}}_files/fourth_output.blob"
+        echo "blob content" > "./${{github.sha}}_${{DATETIME}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "${{github.sha}}_${{env:DATETIME}}_files"
-        path: "./${{github.sha}}_${{env:DATETIME}}_files"
+        name: "${{github.sha}}_${{DATETIME}}_files"
+        path: "./${{github.sha}}_${{DATETIME}}_files"
 
 
 
