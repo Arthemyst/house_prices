@@ -14,7 +14,9 @@ jobs:
     - name: Set Date
       id: set_date
       run: |
-        echo "DATETIME=${{ Get-Date -Format 'yyyy-MM-dd-HH-mm-ss' }}" >> $GITHUB_ENV
+        $datetime = Get-Date -Format 'yyyy-MM-dd-HH-mm-ss'
+        echo "$datetime"
+        echo "DATETIME={ $datetime }" >> $GITHUB_ENV
 
     - name: List All Environment Variables
       run: |
