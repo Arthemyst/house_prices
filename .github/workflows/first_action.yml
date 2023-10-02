@@ -11,34 +11,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Get current time
-      uses: josStorer/get-current-time@v2
-      id: current-time
-      with:
-        format: YYYY-MM-DD
-
     - name: Create Images Directory
       run: |
-        mkdir -p "./${{github.sha}}_${{steps.current-time.outputs.time}}_files"
+        mkdir -p "./${{github.sha}}_${{github.event.repository.updated_at}}_files"
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > "./${{github.sha}}_${{steps.current-time.outputs.time}}_files/output_.csv"
+        echo "Original content" > "./${{github.sha}}_${{github.event.repository.updated_at}}_files/output_.csv"
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > "./${{github.sha}}_${{steps.current-time.outputs.time}}_files/modified_output.csv"
+        echo "Modified content" > "./${{github.sha}}_${{github.event.repository.updated_at}}_files/modified_output.csv"
 
     - name: Third Output File
       run: |
-        echo "Third content" > "./${{github.sha}}_${{steps.current-time.outputs.time}}_files/third_output.csv"
+        echo "Third content" > "./${{github.sha}}_${{github.event.repository.updated_at}}_files/third_output.csv"
 
     - name: Fourth Output File
       run: |
-        echo "blob content" > "./${{github.sha}}_${{steps.current-time.outputs.time}}_files/fourth_output.blob"
+        echo "blob content" > "./${{github.sha}}_${{github.event.repository.updated_at}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "${{github.sha}}_${{steps.current-time.outputs.time}}_files"
-        path: "./${{github.sha}}_${{steps.current-time.outputs.time}}_files"
+        name: "${{github.sha}}_${{github.event.repository.updated_at}}_files"
+        path: "./${{github.sha}}_${{github.event.repository.updated_at}}_files"
