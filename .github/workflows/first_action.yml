@@ -20,7 +20,7 @@ jobs:
       id: datetime
       run: |
         $env:DATETIME = Get-Date -Format "yyyy-MM-ddTHH-mm-ss"
-        echo "DATETIME=$env:DATETIME" | Out-File -FilePath $env:GITHUB_ENV -Append
+        echo "$env:DATETIME" | Out-File -FilePath $env:GITHUB_ENV -Append
         echo "$env:DATETIME" > datetime.txt
 
     - name: Read DATETIME from file
