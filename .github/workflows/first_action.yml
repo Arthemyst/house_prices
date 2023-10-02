@@ -11,33 +11,35 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Get current date
-      id: date
+    - name: Set Date
+      id: set_date
       run: |
-        echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        $date = Get-Date -Format 'yyyy-MM-dd'
+        Write-Output "date=$date"
+        echo "::set-output name=date::$date"
 
     - name: Create Images Directory
       run: |
-        mkdir -p "./${{github.sha}}_${{env.date}}_files"
+        mkdir -p "./${{github.sha}}_${{steps.set_date.outputs.date}}_files"
 
     - name: Run JAR File and Save Output
       run: |
-        echo "Original content" > "./${{github.sha}}_${{env.date}}_files/output_.csv"
+        echo "Original content" > "./${{github.sha}}_${{steps.set_date.outputs.date}}_files/output_.csv"
 
     - name: Modify Output File
       run: |
-        echo "Modified content" > "./${{github.sha}}_${{env.date}}_files/modified_output.csv"
+        echo "Modified content" > "./${{github.sha}}_${{steps.set_date.outputs.date}}_files/modified_output.csv"
 
     - name: Third Output File
       run: |
-        echo "Third content" > "./${{github.sha}}_${{env.date}}_files/third_output.csv"
+        echo "Third content" > "./${{github.sha}}_${{steps.set_date.outputs.date}}_files/third_output.csv"
 
     - name: Fourth Output File
       run: |
-        echo "blob content" > "./${{github.sha}}_${{env.date}}_files/fourth_output.blob"
+        echo "blob content" > "./${{github.sha}}_${{steps.set_date.outputs.date}}_files/fourth_output.blob"
 
     - name: Upload original Output Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "${{github.sha}}_${{env.date}}_files"
-        path: "./${{github.sha}}_${{env.date}}_files"
+        name: "${{github.sha}}_${{steps.set_date.outputs.date}}_files"
+        path: "./${{github.sha}}_${{steps.set_date.outputs.date}}_files"
