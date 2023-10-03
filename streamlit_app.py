@@ -7,6 +7,7 @@ import plotly.express as px
 
 st.title("House price prediction.")
 df = pd.DataFrame()
+
 if "mdf" not in st.session_state:
     st.session_state.mdf = df
 model = joblib.load("model.pkl")
