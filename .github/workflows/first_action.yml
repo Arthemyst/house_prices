@@ -50,3 +50,18 @@ jobs:
       with:
         name: ${{ env.DIR_NAME }}
         path: ./${{ env.DIR_NAME }}
+
+    - name: Post third_output.csv as a comment
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const commentContent = fs.readFileSync('./${{ env.DIR_NAME }}/third_output.csv', 'utf8');
+          github.issues.createComment({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: commentContent
+          });
