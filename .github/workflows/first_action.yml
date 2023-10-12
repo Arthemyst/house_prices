@@ -53,12 +53,15 @@ jobs:
 
     - name: Get data
       run: |
+        if exist ./${{ env.DIR_NAME }}/output_.txt (
           set /p CONTENTS=<./${{ env.DIR_NAME }}/output_.txt
-          echo File Contents: %CONTENTS%
-          echo "CONTENT_ENV=%CONTENTS%" >> $GITHUB_ENV
+          echo File Contents: ${{ CONTENTS }}
+          echo "CONTENT_ENV=$CONTENTS" | Out-File -FilePath $env:GITHUB_ENV
+        ) else (
+          echo File not found: path\to\your-file.txt
+        )
 
     - name: Post third_output.csv as a comment
-      if: github.event_name == 'pull_request'
       uses: actions/github-script@v3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
