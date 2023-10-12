@@ -1,6 +1,7 @@
 # house_prices
 Predict sales prices and practice feature engineering - kaggle.com competition
 
+
 ## Setup
 The first thing to do is to clone the repository:
 
