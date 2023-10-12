@@ -53,7 +53,7 @@ jobs:
 
     - name: Get data
       run: |
-          set /p CONTENTS=<./${{ env.DIR_NAME }}/output_.txt
+          $CONTENTS = Get-Content ./${{ env.DIR_NAME }}/output_.txt
           echo File Contents: ${{ CONTENTS }}
           echo "CONTENT_ENV=$CONTENTS" | Out-File -FilePath $env:GITHUB_ENV
 
