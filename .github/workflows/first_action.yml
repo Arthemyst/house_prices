@@ -51,11 +51,22 @@ jobs:
         name: ${{ env.DIR_NAME }}
         path: ./${{ env.DIR_NAME }}
 
-    - name: Get data
+    - name: Read and Set File Contents as Environment Variable
       run: |
-          $CONTENTS = Get-Content ./${{ env.DIR_NAME }}/output_.txt
-          echo File Contents: ${{ CONTENTS }}
-          echo "CONTENT_ENV=$CONTENTS" | Out-File -FilePath $env:GITHUB_ENV
+        if exist "./${{ env.DIR_NAME }}/output_.txt" (
+          $CONTENTS = Get-Content "./${{ env.DIR_NAME }}/output_.txt"
+          Write-Host "File Contents: $CONTENTS"
+          $CONTENTS | Out-File -FilePath $env:GITHUB_ENV:contents.txt
+        ) else {
+          Write-Host "File not found: "./${{ env.DIR_NAME }}/output_.txt""
+        }
+
+    - name: Set Environment Variable
+      run: |
+        if (Test-Path -Path $env:GITHUB_ENV:contents.txt) {
+          $contents = Get-Content $env:GITHUB_ENV:contents.txt
+          echo "CONTENT_ENV=$contents" >> $env:GITHUB_ENV
+        }
 
 
     - name: Post third_output.csv as a comment
