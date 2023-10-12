@@ -30,6 +30,7 @@ def remove_or_replace_nan_values(df):
 
 
 def choose_columns_for_estimation(df_train_dummies):
+
     columns_for_estimation = []
     for column_name, column_corr in df_train_dummies.corr()["SalePrice"].items():
         if (column_corr > 0.6 or column_corr < -0.6) and column_corr != 1:
