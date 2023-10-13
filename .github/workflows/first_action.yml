@@ -5,25 +5,29 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: linux-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-#    - name: Set Datetime
-#      id: datetime
-#      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
-
     - name: Set Datetime
       id: datetime
-      run: |
-        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
-        echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
+      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+
+#    - name: Set Datetime
+#      id: datetime
+#      run: |
+#        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
+#        echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
+
+#    - name: Set directory name
+#      run: |
+#        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" | Out-File -FilePath $env:GITHUB_ENV
 
     - name: Set directory name
       run: |
-        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" | Out-File -FilePath $env:GITHUB_ENV
+        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" >> $GITHUB_ENV
 
     - name: Create Images Directory
       run: |
@@ -50,97 +54,97 @@ jobs:
       with:
         name: ${{ env.DIR_NAME }}
         path: ./${{ env.DIR_NAME }}
-
-name: First Workflow
-on:
-  push:
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: self-hosted
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
+#
+#name: First Workflow
+#on:
+#  push:
+#  workflow_dispatch:
+#
+#jobs:
+#  build:
+#    runs-on: self-hosted
+#
+#    steps:
+#    - name: Checkout code
+#      uses: actions/checkout@v3
+#
+##    - name: Set Datetime
+##      id: datetime
+##      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+#
 #    - name: Set Datetime
 #      id: datetime
-#      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
-
-    - name: Set Datetime
-      id: datetime
-      run: |
-        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
-        echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
-
-    - name: Set directory name
-      run: |
-        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" | Out-File -FilePath $env:GITHUB_ENV
-
-    - name: Create Images Directory
-      run: |
-        mkdir -p "./${{ env.DIR_NAME }}"
-
-    - name: Run JAR File and Save Output
-      run: |
-        echo "Original content" > "./${{ env.DIR_NAME }}/output_.txt"
-
-    - name: Modify Output File
-      run: |
-        echo "Modified content" > "./${{ env.DIR_NAME }}/modified_output.csv"
-
-    - name: Third Output File
-      run: |
-        echo "Third content" > "./${{ env.DIR_NAME }}/third_output.csv"
-
-    - name: Fourth Output File
-      run: |
-        echo "blob content" > "./${{ env.DIR_NAME }}/fourth_output.blob"
-
-    - name: Upload original Output Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{ env.DIR_NAME }}
-        path: ./${{ env.DIR_NAME }}
-
-    - name: Read and Set File Contents as Environment Variable
-      run: |
-          $CONTENTS = Get-Content "./${{ env.DIR_NAME }}/output_.txt"
-          Write-Host "File Contents: $CONTENTS"
-          $CONTENTS | Out-File -FilePath $env:GITHUB_ENV:contents.txt
-          Write-Host "File not found: "./${{ env.DIR_NAME }}/output_.txt""
-
-    - name: Set Environment Variable
-      run: |
-          $contents = Get-Content $env:GITHUB_ENV:contents.txt
-          echo "CONTENT_ENV=$contents" | Out-File -FilePath $env:GITHUB_ENV
-
-
-    - name: Post third_output.csv as a comment
-      uses: actions/github-script@v3
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const fs = require('fs');
-          const commentContent = fs.readFileSync('./${{ env.DIR_NAME }}/third_output.csv', 'utf8');
-          github.issues.createComment({
-            issue_number: context.payload.pull_request.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: commentContent ${{ env.CONTENT_ENV }}
-          });
-
-    - name: Post third_output.csv as a comment
-      uses: actions/github-script@v3
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const fs = require('fs');
-          const commentContent = fs.readFileSync('./${{ env.DIR_NAME }}/third_output.csv', 'utf8');
-          github.issues.createComment({
-            issue_number: context.payload.pull_request.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: commentContent ${{ env.CONTENT_ENV }}
-          });
+#      run: |
+#        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
+#        echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
+#
+#    - name: Set directory name
+#      run: |
+#        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" | Out-File -FilePath $env:GITHUB_ENV
+#
+#    - name: Create Images Directory
+#      run: |
+#        mkdir -p "./${{ env.DIR_NAME }}"
+#
+#    - name: Run JAR File and Save Output
+#      run: |
+#        echo "Original content" > "./${{ env.DIR_NAME }}/output_.txt"
+#
+#    - name: Modify Output File
+#      run: |
+#        echo "Modified content" > "./${{ env.DIR_NAME }}/modified_output.csv"
+#
+#    - name: Third Output File
+#      run: |
+#        echo "Third content" > "./${{ env.DIR_NAME }}/third_output.csv"
+#
+#    - name: Fourth Output File
+#      run: |
+#        echo "blob content" > "./${{ env.DIR_NAME }}/fourth_output.blob"
+#
+#    - name: Upload original Output Artifact
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: ${{ env.DIR_NAME }}
+#        path: ./${{ env.DIR_NAME }}
+#
+#    - name: Read and Set File Contents as Environment Variable
+#      run: |
+#          $CONTENTS = Get-Content "./${{ env.DIR_NAME }}/output_.txt"
+#          Write-Host "File Contents: $CONTENTS"
+#          $CONTENTS | Out-File -FilePath $env:GITHUB_ENV:contents.txt
+#          Write-Host "File not found: "./${{ env.DIR_NAME }}/output_.txt""
+#
+#    - name: Set Environment Variable
+#      run: |
+#          $contents = Get-Content $env:GITHUB_ENV:contents.txt
+#          echo "CONTENT_ENV=$contents" | Out-File -FilePath $env:GITHUB_ENV
+#
+#
+#    - name: Post third_output.csv as a comment
+#      uses: actions/github-script@v3
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
+#        script: |
+#          const fs = require('fs');
+#          const commentContent = fs.readFileSync('./${{ env.DIR_NAME }}/third_output.csv', 'utf8');
+#          github.issues.createComment({
+#            issue_number: context.payload.pull_request.number,
+#            owner: context.repo.owner,
+#            repo: context.repo.repo,
+#            body: commentContent ${{ env.CONTENT_ENV }}
+#          });
+#
+#    - name: Post third_output.csv as a comment
+#      uses: actions/github-script@v3
+#      with:
+#        github-token: ${{ secrets.GITHUB_TOKEN }}
+#        script: |
+#          const fs = require('fs');
+#          const commentContent = fs.readFileSync('./${{ env.DIR_NAME }}/third_output.csv', 'utf8');
+#          github.issues.createComment({
+#            issue_number: context.payload.pull_request.number,
+#            owner: context.repo.owner,
+#            repo: context.repo.repo,
+#            body: commentContent ${{ env.CONTENT_ENV }}
+#          });
