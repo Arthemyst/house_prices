@@ -21,6 +21,7 @@ overal_qual = st.slider(
 )
 st.session_state.overal_qual = overal_qual
 
+
 if "total_bsmt_sf" not in st.session_state:
     st.session_state["total_bsmt_sf"] = 100
 
