@@ -1,0 +1,44 @@
+name: First Workflow
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: linux-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set Datetime
+      id: datetime
+      run: echo "DATETIME=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+
+#    - name: Set Datetime
+#      id: datetime
+#      run: |
+#        $datetime = Get-Date -Format 'yyyy-MM-dd-THH-mm-ss'
+#        echo "DATETIME=$datetime" | Out-File -FilePath $env:GITHUB_ENV
+
+#    - name: Set directory name
+#      run: |
+#        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" | Out-File -FilePath $env:GITHUB_ENV
+
+    - name: Set directory name
+      run: |
+        echo "DIR_NAME=${{ github.sha }}_${{ env.DATETIME }}_files" >> $GITHUB_ENV
+
+    - name: Create Images Directory
+      run: |
+        mkdir -p ".\${{ env.DIR_NAME }}"
+
+    - name: Run JAR File and Save Output
+      run: |
+        echo "Original content" > ".\${{ env.DIR_NAME }}\output.txt"
+        
+    - name: Upload original Output Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.DIR_NAME }}
+        path: ./${{ env.DIR_NAME }}
