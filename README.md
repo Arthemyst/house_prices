@@ -4,6 +4,7 @@ Predict sales prices and practice feature engineering - kaggle.com competition
 ## Setup
 The first thing to do is to clone the repository:
 
+
 ```sh
 $ git clone https://github.com/Arthemyst/job_search_app.git
 $ cd job_search_app
